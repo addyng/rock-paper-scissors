@@ -20,23 +20,25 @@ const results = document.getElementById('results');
 choices.addEventListener('click', (event) => {
     let target = event.target;
 
-    switch(target.id) {
-        case 'rock':
-            playerChoice = "rock";
-            break;
-        case 'paper':
-            playerChoice = "paper";
-            break;
-        case 'scissors':
-            playerChoice = "scissors";
-            break;
-    }
+    if (target.matches('#rock, #paper, #scissors')) {
+        switch(target.id) {
+            case 'rock':
+                playerChoice = "rock";
+                break;
+            case 'paper':
+                playerChoice = "paper";
+                break;
+            case 'scissors':
+                playerChoice = "scissors";
+                break;
+        }
 
-    computerChoice = getComputerChoice();
-    singlePlay(playerChoice, computerChoice);
+        computerChoice = getComputerChoice();
+        singlePlay(playerChoice, computerChoice);
 
-    if (computerScore === 5 || playerScore === 5) {
-        gameEnd();
+        if (computerScore === 5 || playerScore === 5) {
+            gameEnd();
+        }
     }
 });
 
