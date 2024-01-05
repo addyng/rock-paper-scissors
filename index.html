@@ -1,12 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock Paper Scissors</title>
-    <script src="./script.js"></script>
-</head>
-    <body>
-    
-    </body>
-</html>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rock Paper Scissors</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="./script.js" defer></script>
+    </head>
+        <body>
+            <div id="header">Rock Paper Scissors Game!</div>
+
+            <div id="options">
+                <button id="rock" class="opt"><img src="./images/rock.svg" height="300px" width="300px"></button>
+                <button id="paper" class="opt"><img src="./images/paper.svg" height="300px" width="300px"></button>
+                <button id="scissors" class="opt"><img src="./images/scissors.svg" height="300px" width="300px"></button>
+            </div>
+
+            <div id="results">
+                <div id="choices"></div>
+                <div id="trackScore">
+                    <div id="playerScore">Player: 0</div>
+                    <div id="computerScore">Computer: 0</div>
+                </div>
+            </div>
+
+            <div id="footer">
+                <div id="created">Created by addyng</div>
+            </div>
+        </body>
+    </html>

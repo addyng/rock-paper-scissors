@@ -1,70 +1,89 @@
 function getComputerChoice() {
-    const choices = ["Rock", "Paper", "Scissors"];
+    const choices = ["rock", "paper", "scissors"];
     let ind = Math.floor(Math.random() * choices.length);
     return choices[ind];
 }
 
-function singlePlay() {
-    playerSelection = prompt("Paper, scissors, rock?: ").toLowerCase();
-    computerSelection = getComputerChoice().toLowerCase();
+let playerChoice = "";
+let computerChoice = "";
+let playerScore = 0;
+let computerScore = 0;
 
-    if (playerSelection === "rock" && computerSelection === "rock") {
-        console.log("You tied! Play again!");
-        return singlePlay();
+const choices = document.getElementById('options');
+const answer = document.getElementById('choices');
+const playScore = document.getElementById('playerScore');
+const compScore = document.getElementById('computerScore');
+const buttons = document.getElementsByClassName('opt');
+const results = document.getElementById('results');
+
+//Uses bubbling
+choices.addEventListener('click', (event) => {
+    let target = event.target;
+
+    switch(target.id) {
+        case 'rock':
+            playerChoice = "rock";
+            break;
+        case 'paper':
+            playerChoice = "paper";
+            break;
+        case 'scissors':
+            playerChoice = "scissors";
+            break;
     }
-    if (playerSelection === "rock" && computerSelection === "paper") {
-        console.log("You lost! Rock loses to paper!");
-        return 0;
+
+    computerChoice = getComputerChoice();
+    singlePlay(playerChoice, computerChoice);
+
+    if (computerScore === 5 || playerScore === 5) {
+        gameEnd();
     }
-    if (playerSelection === "rock" && computerSelection === "scissors") {
-        console.log("You won! Rock wins against scissors!");
-        return 1;
+});
+
+function singlePlay(player, computer) {
+    console.log(player);
+    if (player === computer) {
+        answer.textContent = `You both chose ${player}. Try again!`;
+        return;
     }
-    if (playerSelection === "paper" && computerSelection === "rock") {
-        console.log("You won! Paper wins against rock!");
-        return 1;
+    else if (
+        (player === 'rock' && computer === 'scissors') ||
+        (player === 'paper' && computer === 'rock') ||
+        (player === 'scissors' && computer === 'paper')
+    ) {
+        answer.textContent = `You chose ${player} and the computer chose ${computer}. You won!`;
+        playerScore++;
+        playScore.textContent = `Player: ${playerScore}`;
     }
-    if (playerSelection === "paper" && computerSelection === "paper") {
-        console.log("You tied! Play again!");
-        return singlePlay();
-    }
-    if (playerSelection === "paper" && computerSelection === "scissors") {
-        console.log("You lost! Paper loses to scissors!");
-        return 0;
-    }
-    if (playerSelection === "scissors" && computerSelection === "rock") {
-        console.log("You lost! Scissors loses to rock!");
-        return 0;
-    }
-    if (playerSelection === "scissors" && computerSelection === "paper") {
-        console.log("You won! Scissors wins against paper!");
-        return 1;
-    }
-    if (playerSelection === "scissors" && computerSelection === "scissors") {
-        console.log("You tied! Play again!");
-        return singlePlay();
+    else {
+        answer.textContent = `You chose ${player} and the computer chose ${computer}. You lost!`;
+        computerScore++;
+        compScore.textContent = `Computer: ${computerScore}`;
     }
 }
 
-function game() {
-    let player = 0;
-    let bot = 0;
+function gameEnd() {
+    Array.from(buttons).forEach((btn) => {
+        btn.disabled = true;
+    });
 
-    for (let i = 0; i < 5; i++) {
-        let result = singlePlay();
-        if (result === 1) {
-            player++;
-        }
-        else {
-            bot++;
-        }
-    }
+    let playAgain = document.createElement('button');
+    playAgain.className = "playAgain";
+    playAgain.textContent = "Play Again?";
+    results.appendChild(playAgain);
 
-    if (player > bot) {
-        console.log("You won by " + (player - bot) + " games!");
-    } else {
-        console.log("You lost by " + (bot - player) + " games!");
-    }
+    playAgain.addEventListener('click', (e) => {
+        Array.from(buttons).forEach((btn) => {
+            btn.disabled = false;
+        });
+
+        playerScore = 0;
+        computerScore = 0;
+        playerChoice = "";
+        computerChoice = "";
+        answer.textContent = "";
+        compScore.textContent = "Computer: 0";
+        playScore.textContent = "Player: 0";
+        results.removeChild(playAgain);
+    });
 }
-
-game();

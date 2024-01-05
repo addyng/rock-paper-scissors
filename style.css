@@ -1,0 +1,81 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+
+    background-image: url('./images/bg1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* Need this since the images were taking the click event */
+img {
+    pointer-events: none;
+}
+
+/* Options */
+#options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    gap: 32px;
+    /* position: relative; */
+}
+
+#options button {
+    /* Remove default button styles */
+    border: none;
+    background: none;
+    transition: background-color 0.3s ease;
+    transition: box-shadow 0.1s ease;
+    border-radius: 8px;
+    padding: 12px;
+} 
+#options button:hover {
+    background-color: rgb(45, 70, 89); 
+    /* border: 2px solid black; */
+    box-shadow: 0 0 0 5px #201f1f;
+}
+
+/* header footer */
+#header, #footer{  
+    text-align: center;
+    width: 100%;
+    background: rgb(179, 178, 178);
+    padding: 8px 0;
+    font-family: Monaco;
+    font-weight: bold;
+    font-size: 32px;
+}
+#footer {
+    font-size: 16px;
+    padding: 4px;
+}
+
+#results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 0.25 1 auto;
+    gap: 16px;
+}
+#trackScore {
+    display: flex;
+    gap: 32px;
+}
+
+#choices, #playerScore, #computerScore {
+    font-family: "Courier New";
+    font-weight: bold;
+    font-size: 32px;
+}
+
+.playAgain {
+    font-family: "Courier New";
+    font-weight: bold;
+    font-size: 32px;
+}
